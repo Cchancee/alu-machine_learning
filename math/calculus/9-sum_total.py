@@ -14,8 +14,10 @@ def summation_i_squared(n):
     - int or None: The interger value of the sum. Returns None if
                    n is not a valid number
     '''
-    if not isinstance(n, int) or n < 0:
+    if not isinstance(n, int) or n < 1:
         return None
+    if n = 1:
+        return 1
 
     result = n * (n + 1) * (2 * n + 1) // 6
 
