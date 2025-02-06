@@ -1,35 +1,24 @@
 #!/usr/bin/env python3
-'''Calculate the derivative of a polynomial '''
+""" The derivative of polynomial
+"""
 
 
 def poly_derivative(poly):
+    """ Find the derivative of polynomial
+    Example: if f(x) = x^3 +4x^2 + 9x +5, poly is equal to [5, 3, 4, 1]
+
+    Args:
+        poly (_type_): _description_
     """
-    Calculate the derivative of a polynomial.
-
-    Parameters:
-    - poly (list): Coefficients representing a polynomial.
-
-    Returns:
-    - list or None: New coefficients representing the
-                    derivative of the polynomial.
-                    Returns None if poly is not valid.
-    """
-    if not isinstance(poly, list):
+    derivative = []
+    if not isinstance(poly, list) or len(poly) == 0:
         return None
-
-    if len(poly) < 2:
-        return None
-
-    result = []
-
-    for i in range(1, len(poly)):
-        if not isinstance(poly[i], (int, float)):
-            return None
-
-        new_coeff = i * poly[i]
-        result.append(new_coeff)
-
-    if not result:
+    if len(poly) == 1:
         return [0]
+    for i in range(len(poly)-1, 0, -1):
 
-    return result
+        derivative.append(poly[i]*i)
+    return derivative[::-1]
+
+
+# print(poly_derivative([]))
