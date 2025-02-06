@@ -1,49 +1,31 @@
 #!/usr/bin/env python3
-'''Calculates the integral of a polynomial'''
+"""
+Calculates the integral of a polynomial
+"""
 
 
 def poly_integral(poly, C=0):
+    """ Calculates the integral of a polynomial
     """
-    Calculate the integral of a polynomial.
-
-    Args:
-        poly (list): Coefficients representing a polynomial.
-        C (int): Integration constant.
-
-    Returns:
-        list or None: New coefficients representing the
-        integral of the polynomial.
-                      Returns None if poly or C are not valid.
-    """
-    # Check if poly is a list and C is an integer
-    is_valid_poly = isinstance(poly, list)
-    is_valid_poly = is_valid_poly andall(isinstance(c, (int, float)) for c in poly)
-    is_valid_poly = is_valid_poly and isinstance(C, int)
-
-    if not is_valid_poly:
+    integral = []
+    # check for the validity of the inputs
+    if not isinstance(poly, list) or len(poly) == 0 or not isinstance(C, int):
         return None
+    # calculate the cofficients
+    for i in range(len(poly)-1, 0, -1):
+        integral.append(poly[i]/(i+1))
 
-    # Initialize the result list with the integration constant C
-    result = [C]
+    integral.append(poly[0])
+    integral.append(C)
+    # fit the output like on the intranet
+    if len(poly) == 1 and poly[0] == 0:
+        integral = [C]
+    for i in range(len(integral)):
+        if integral[i] % 1 == 0:
+            integral[i] = int(integral[i])
 
-    # Iterate through the coefficients of the polynomial
-    for i, coeff in enumerate(poly):
-        # Check if the coefficient is a valid number
-        if not isinstance(coeff, (int, float)):
-            return None
+    return integral[::-1]
 
-        # Calculate the new coefficient after integration
-        new_coeff = coeff / (i + 1)
 
-        # If the result is a whole number, represent it as an integer
-        if new_coeff.is_integer():
-            new_coeff = int(new_coeff)
-
-        # Append the new coefficient to the result list
-        result.append(new_coeff)
-
-    # Remove trailing zeros
-    while result and result[-1] == 0:
-        result.pop()
-
-    return result
+# poly = [0]
+# print(poly_integral(poly, C=9))
