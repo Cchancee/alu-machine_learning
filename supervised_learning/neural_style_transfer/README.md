@@ -1,2 +1,0 @@
-Neural Style Transfer
-
